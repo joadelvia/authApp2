@@ -34,7 +34,11 @@ export class LoginComponent {
          localStorage.setItem('token',resp.access_token!)
          this.router.navigateByUrl('/dashboard');
       }),
-       error: resp => Swal.fire('Error', resp.error.message, 'error')
+       error: resp => {
+         console.log(resp);
+         
+         Swal.fire('Error', resp.error.message, 'error')
+       }
     });
   }
 
