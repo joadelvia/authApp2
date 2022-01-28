@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthResponse } from '../interfaces/interfaces';
 
@@ -18,13 +18,13 @@ export class AuthService {
 
   }
 
-  validarToken():Observable<AuthResponse>{
+  validarToken():boolean{
     const url = `${ this.baseUrl }/products`;
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('token')}` || '' );
 
-    return this.http.get<AuthResponse>( url, { headers } );
-    
+    this.http.get<AuthResponse>( url, { headers } )
+    .catch
         
   }
 }
